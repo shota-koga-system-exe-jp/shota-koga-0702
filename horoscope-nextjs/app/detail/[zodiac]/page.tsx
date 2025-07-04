@@ -24,11 +24,12 @@ export async function generateStaticParams() {
 }
 
 interface DetailPageProps {
-  params: {
+  params: Promise<{
     zodiac: string;
-  };
+  }>;
 }
 
-export default function DetailPage({ params }: DetailPageProps) {
-  return <DetailClient zodiacName={params.zodiac} />;
+export default async function DetailPage({ params }: DetailPageProps) {
+  const { zodiac } = await params;
+  return <DetailClient zodiacName={zodiac} />;
 }
